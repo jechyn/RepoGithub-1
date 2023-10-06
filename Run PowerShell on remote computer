@@ -1,0 +1,7 @@
+Run PowerShell on remote computer
+$GivenName = Read-Host 'Zadej jmeno'
+$Surename = Read-Host 'Zadej prijmeni'
+$Accname = Read-Host 'Zadej nazev uctu'
+New-ADUser -Name "$GivenName $Surename" -GivenName $GivenName -Surname $Surename -SamAccountName $Accname -UserPrincipalName "$Accname@praha.ciglermarani.cz" -ScriptPath "cma.bat" -Path "OU=_UzivateleCMA,DC=praha,DC=ciglermarani,DC=cz" -AccountPassword(Read-Host -AsSecureString "Zadej heslo") -Enabled $true
+Add-ADGroupMember -Identity Newbies -Members $Accname
+Add-ADGroupMember -Identity all -Members $Accname
